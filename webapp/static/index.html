@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Account · berkkarabacak.com</title>
+<meta name="color-scheme" content="light dark" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Crect%20width='64'%20height='64'%20rx='14'%20fill='%234f6bed'/%3E%3Ctext%20x='32'%20y='44'%20font-family='Georgia'%20font-size='30'%20font-weight='700'%20fill='%23fff'%20text-anchor='middle'%3EBK%3C/text%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="https://berkkarabacak.com"><span class="mono">BK</span><span>Account</span></a>
+    <a class="home-link" href="https://berkkarabacak.com">← berkkarabacak.com</a>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- AUTH -->
+  <section id="v-auth" class="view">
+    <h1>Sign in</h1>
+    <p class="sub">One account for all apps on berkkarabacak.com — your saved Jira sites &amp; tokens live here.</p>
+    <div class="card">
+      <div id="google-block" style="display:none">
+        <a class="btn google" href="api/auth/google/login">
+          <svg viewBox="0 0 18 18" width="18" height="18" aria-hidden="true"><path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.8 2.72v2.26h2.92a8.78 8.78 0 0 0 2.68-6.62z"/><path fill="#34A853" d="M9 18c2.43 0 4.47-.8 5.96-2.18l-2.92-2.26c-.8.54-1.84.86-3.04.86-2.34 0-4.32-1.58-5.03-3.7H.96v2.34A9 9 0 0 0 9 18z"/><path fill="#FBBC05" d="M3.97 10.72A5.4 5.4 0 0 1 3.68 9c0-.6.1-1.18.29-1.72V4.94H.96A9 9 0 0 0 0 9c0 1.45.35 2.82.96 4.06l3.01-2.34z"/><path fill="#EA4335" d="M9 3.58c1.32 0 2.5.45 3.44 1.35l2.58-2.58A9 9 0 0 0 .96 4.94l3.01 2.34C4.68 5.16 6.66 3.58 9 3.58z"/></svg>
+          Continue with Google
+        </a>
+        <div class="ordiv"><span>or</span></div>
+      </div>
+      <div class="tabs">
+        <button class="tab active" data-tab="login">Sign in</button>
+        <button class="tab" data-tab="register">Create account</button>
+      </div>
+
+      <div id="t-login">
+        <label class="fld"><span>Email</span><input id="li-email" type="email" autocomplete="username" /></label>
+        <label class="fld"><span>Password</span><input id="li-pw" type="password" autocomplete="current-password" /></label>
+        <button class="btn" id="login-btn">Sign in</button>
+      </div>
+
+      <div id="t-register" style="display:none">
+        <label class="fld"><span>Name</span><input id="rg-name" type="text" autocomplete="name" placeholder="optional" /></label>
+        <label class="fld"><span>Email</span><input id="rg-email" type="email" autocomplete="username" /></label>
+        <label class="fld"><span>Password</span><input id="rg-pw" type="password" autocomplete="new-password" placeholder="at least 8 characters" /></label>
+        <button class="btn" id="register-btn">Create account</button>
+      </div>
+
+      <div class="msg err" id="auth-msg"></div>
+    </div>
+  </section>
+
+  <!-- ACCOUNT -->
+  <section id="v-account" class="view">
+    <div class="userbar">
+      <div class="avatar" id="avatar">B</div>
+      <div><b id="u-name"></b><div class="e" id="u-email"></div></div>
+      <div class="spacer"></div>
+      <button class="btn ghost sm" id="logout-btn">Sign out</button>
+    </div>
+
+    <div class="card wide">
+      <h2>Saved Jira connections</h2>
+      <p class="sub">Site URLs and API tokens saved here are shared across your apps (Crosschecker, Cloud Site Reset, and more). Tokens are encrypted at rest and never shown again after saving.</p>
+
+      <div class="conns" id="conns"></div>
+      <div class="empty" id="conns-empty" style="display:none">No saved connections yet — add one below.</div>
+
+      <details class="addbox" id="addbox">
+        <summary><span id="addbox-title">+ Add a Jira connection</span></summary>
+        <label class="fld"><span>Name</span><input id="c-name" type="text" placeholder="e.g. Production, Sandbox" /></label>
+        <label class="fld"><span>Site URLs <span style="color:var(--faint);font-weight:400">— one per line</span></span>
+          <textarea id="c-url" rows="3" placeholder="your-site.atlassian.net&#10;another-site.atlassian.net"></textarea></label>
+        <label class="fld"><span>Account email</span><input id="c-email" type="email" placeholder="you@example.com" /></label>
+        <label class="fld"><span>API token <a href="https://id.atlassian.com/manage-profile/security/api-tokens" target="_blank" rel="noopener">(create one ↗)</a></span><input id="c-token" type="password" /></label>
+        <p class="hint" id="addbox-hint">One Atlassian API token works on every site where your account has access — list as many as you like. I'll verify the token before saving.</p>
+        <div class="row">
+          <button class="btn" id="add-btn">Verify &amp; save</button>
+          <button class="btn ghost" id="cancel-edit" style="display:none">Cancel</button>
+        </div>
+        <div class="msg err" id="add-msg"></div>
+      </details>
+    </div>
+  </section>
+
+</main>
+<footer>berkkarabacak.com · central account &amp; credential vault</footer>
+<script src="app.js"></script>
+</body>
+</html>

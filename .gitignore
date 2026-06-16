@@ -1,0 +1,23 @@
+# Python
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# Runtime data / secrets — never commit
+*.db
+runs/
+.bk_session_secret
+.bk_internal_key
+.bk_vault_key
+.bk_google_oauth.json
+.credential_secret
+.session_secret
+users.json
+*.env
+token/
+GITHUB_TOKEN.txt
+
+# OS / editor
+.DS_Store
+Thumbs.db
